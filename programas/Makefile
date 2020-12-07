@@ -1,4 +1,4 @@
-.DEFAULT_GOAL = risco
+.DEFAULT_GOAL = superescalar
 
 memoria.o: ../src/memoria.cpp ../include/memoria.h
 	g++ ../src/memoria.cpp -c
@@ -9,9 +9,9 @@ ula.o: ../src/ula.cpp ../include/ula.h
 funcoes.o: ../src/funcoes.cpp ../include/funcoes.h
 	g++ ../src/funcoes.cpp -c
 
-risco: risco.cpp memoria.o registradores.o ula.o funcoes.o
-	g++ risco.cpp memoria.o registradores.o ula.o funcoes.o -o risco
+superescalar: superescalar.cpp memoria.o registradores.o ula.o funcoes.o
+	g++ superescalar.cpp memoria.o registradores.o ula.o funcoes.o -o superescalar
 
 clear: 
 	rm *.o
-	rm risco
+	rm superescalar
