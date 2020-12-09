@@ -7,7 +7,7 @@ using namespace std;
 class MEM
 {
     private:
-    	static int mem[256]; // inicio do programa: 0; inicio dos dados: 128;
+    	static int mem[256];
     public:
 	    MEM();
 	    int get_mem(int posicao);

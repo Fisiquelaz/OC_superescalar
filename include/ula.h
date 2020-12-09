@@ -12,7 +12,6 @@ class ULA {
   public:
     ULA();
     
-    //void LDR(int reg, int mem);
     void ADD(int dest, int op1, int op2);
     void SUB(int dest, int op1, int op2);
     void OR(int dest, int op1, int op2);

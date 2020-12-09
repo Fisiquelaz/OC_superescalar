@@ -19,7 +19,7 @@ int main() {
 
     string instrucoes[256], instr_ULA[256], instr_MEM[256], instr_temp[256];
     string instrucao, codigo, arquivo, entrada;
-    string reg_destino, reg_op1, reg_op2, const_ula;
+    string reg_destino, reg_op1, reg_op2;
     string end_memoria, reg_memoria, const_memoria;
     int iULA = 0, iMEM = 0, itemp = 0, op1, op2, dest;
     char tr;
@@ -61,6 +61,7 @@ int main() {
         iULA++;
       }
     }
+    //Preenchendo espaços vazios com NOP
     if(min(iMEM, iULA) == iULA){
       for(int i = 0; i < iMEM; i++){
         instr_ULA[i] = "00000000000000000000";
@@ -71,6 +72,7 @@ int main() {
         instr_MEM[i] = "00000000000000000000";
       }
     }
+    //Adicionando STR no final da fila de instruções de memória
     for(int i = (max(iMEM,iULA)-itemp); i < max(iMEM,iULA); i++){
       instr_MEM[i] = instr_temp[i-(max(iMEM,iULA)-itemp)];
     }
@@ -162,21 +164,22 @@ int main() {
           registradores.LDR(BTD(stoi(reg_memoria)), memoria.get_mem(BTD(stoi(end_memoria))));
         }
     }
+    //Escrevendo saída
     ofstream outFile ("saida.txt");
     if(outFile.is_open()){
-        outFile << "Registradores: " << endl;
-        for(int i = 0; i < 32; i++){
-            outFile << i << ": " << registradores.get_reg(i) << "  ";
-        }
-        outFile << endl;
-        outFile << "===============================================" << endl;
-        outFile << "Memória: " << endl;
-        for(int i = 0; i < 256; i++){
-            outFile << i << ": " << memoria.get_mem(i) << "  ";
-        }
-        outFile << endl;
-        outFile << "===============================================" << endl;
-        outFile << "Ciclos: " << CP << endl;
+      outFile << "Ciclos: " << CP << endl;
+      outFile << "===============================================" << endl;
+      outFile << "Registradores: " << endl;
+      for(int i = 0; i < 32; i++){
+          outFile << i << ": " << registradores.get_reg(i) << "  ";
+      }
+      outFile << endl;
+      outFile << "===============================================" << endl;
+      outFile << "Memória: " << endl;
+      for(int i = 0; i < 256; i++){
+          outFile << i << ": " << memoria.get_mem(i) << "  ";
+      }
+      outFile << endl;
     }
     outFile.close();
     return 0;
