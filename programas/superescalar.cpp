@@ -15,7 +15,7 @@ int main() {
     MEM memoria;
     REGS registradores;
     ULA ula;
-    int programa = 0;
+    int programa = 0, CP;
 
     string instrucoes[100], instr_ULA[100], instr_MEM[100], instr_temp[100];
     string instrucao, codigo, arquivo, entrada;
@@ -75,7 +75,7 @@ int main() {
       instr_MEM[i] = instr_temp[i-(max(iMEM,iULA)-itemp)];
     }
 
-    for(int CP = 0; CP < max(iMEM, iULA); CP++){
+    for(CP = 0; CP < max(iMEM, iULA); CP++){
         //Identificando operandos a partir da palavra de instrução
         instrucao = instr_ULA[CP];
         codigo = instrucao.substr(0,4);
@@ -176,6 +176,7 @@ int main() {
         }
         outFile << endl;
         outFile << "===============================================" << endl;
+        outFile << "Ciclos: " << CP << endl;
     }
     outFile.close();
     return 0;
