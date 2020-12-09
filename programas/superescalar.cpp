@@ -17,7 +17,7 @@ int main() {
     ULA ula;
     int programa = 0, CP;
 
-    string instrucoes[100], instr_ULA[100], instr_MEM[100], instr_temp[100];
+    string instrucoes[256], instr_ULA[256], instr_MEM[256], instr_temp[256];
     string instrucao, codigo, arquivo, entrada;
     string reg_destino, reg_op1, reg_op2, const_ula;
     string end_memoria, reg_memoria, const_memoria;
