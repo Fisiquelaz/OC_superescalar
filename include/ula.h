@@ -13,13 +13,15 @@ class ULA {
     ULA();
     
     //void LDR(int reg, int mem);
-    void ADD(int reg, int mem);
-    void OR(int reg, int mem);
-    void AND(int reg, int mem);
-    void NOT(int reg);
-    void SUB(int reg, int mem);
-    void NEG(int reg);
-    void SHR(int reg);
+    void ADD(int dest, int op1, int op2);
+    void SUB(int dest, int op1, int op2);
+    void OR(int dest, int op1, int op2);
+    void AND(int dest, int op1, int op2);
+    void NOT(int dest);
+    void XOR(int dest, int op1, int op2);
+    void NEG(int dest);
+    void SHR(int dest);
+    void SHL(int dest);
 
 };
 #endif

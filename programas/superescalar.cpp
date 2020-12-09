@@ -1,6 +1,7 @@
 #include "../include/registradores.h"
 #include "../include/ula.h"
 #include "../include/memoria.h"
+#include "../include/funcoes.h"
 
 #include <iostream>
 #include <iomanip>
@@ -16,11 +17,11 @@ int main() {
     ULA ula;
     int programa = 0;
 
-    ifstream inFile;
-    string instrucoes[100], instr_ULA[100], instr_MEM[100];
+    string instrucoes[100], instr_ULA[100], instr_MEM[100], instr_temp[100];
+    string instrucao, codigo, arquivo, entrada;
     string reg_destino, reg_op1, reg_op2, const_ula;
-    string end_memoria, reg_memoria, const_ula;
-    int iULA = 0, iMEM = 0, op1, op2, dest;
+    string end_memoria, reg_memoria, const_memoria;
+    int iULA = 0, iMEM = 0, itemp = 0, op1, op2, dest;
     char tr;
 
     ifstream inFile;
@@ -47,22 +48,31 @@ int main() {
     for(int i = 0; i < programa; i++){
       instrucao = instrucoes[i];
       codigo = instrucao.substr(0,4);
-      if (codigo == "0001" || codigo == "0010"){
+      if (codigo == "0010"){
         instr_MEM[iMEM] = instrucao;
+        iMEM++;
+      }
+      else if(codigo == "0001"){
+        instr_temp[itemp] = instrucao;
+        itemp++;
       }
       else{
         instr_ULA[iULA] = instrucao;
+        iULA++;
       }
     }
     if(min(iMEM, iULA) == iULA){
       for(int i = 0; i < iMEM; i++){
-        instr_ULA[i] = "00000000000000000000"
+        instr_ULA[i] = "00000000000000000000";
       }
     }
     else{
       for(int i = 0; i < iULA; i++){
-        instr_MEM[i] = "00000000000000000000"
+        instr_MEM[i] = "00000000000000000000";
       }
+    }
+    for(int i = (max(iMEM,iULA)-itemp); i < max(iMEM,iULA); i++){
+      instr_MEM[i] = instr_temp[i-(max(iMEM,iULA)-itemp)];
     }
 
     for(int CP = 0; CP < max(iMEM, iULA); CP++){
@@ -75,14 +85,14 @@ int main() {
         reg_op1 = instrucao.substr(10,5);
         reg_op2 = instrucao.substr(15,5);
 
-        dest = BTD(reg_destino);
-        if(tr == "0"){
-          op1 = REGS.get_reg(BTD(reg_op1));
-          op2 = REGS.get_reg(BTD(reg_op2));
+        dest = BTD(stoi(reg_destino));
+        if(tr == '0'){
+          op1 = registradores.get_reg(BTD(stoi(reg_op1)));
+          op2 = registradores.get_reg(BTD(stoi(reg_op2)));
         }
         else{
-          op1 = BTD(reg_op1);
-          op2 = BTD(reg_op2);
+          op1 = BTD(stoi(reg_op1));
+          op2 = BTD(stoi(reg_op2));
         }
 
         if(codigo == "0000"){
@@ -90,31 +100,39 @@ int main() {
         }
         if(codigo == "0011"){
           //ADD
-          ULA.ADD(dest, op1, op2);
+          ula.ADD(dest, op1, op2);
         }
         if(codigo == "0100"){
           //SUB
+          ula.SUB(dest, op1, op2);
         }
         if(codigo == "0101"){
           //OR
+          ula.OR(dest, op1, op2);
         }
         if(codigo == "0110"){
           //AND
+          ula.AND(dest, op1, op2);
         }
         if(codigo == "0111"){
           //NOT
+          ula.NOT(dest);
         }
         if(codigo == "1000"){
           //XOR
+          ula.XOR(dest, op1, op2);
         }
         if(codigo == "1001"){
           //NEG
+          ula.NEG(dest);
         }
         if(codigo == "1010"){
           //SHR
+          ula.SHR(dest);
         }
         if(codigo == "1011"){
           //SHL
+          ula.SHL(dest);
         }
 
 
@@ -131,14 +149,33 @@ int main() {
         }
         if(codigo == "0001"){
           //STR
+          if(tr == '0'){
+            op1 = registradores.get_reg(BTD(stoi(reg_memoria)));
+          }
+          else{
+            op1 = BTD(stoi(const_memoria));
+          }
+          memoria.STR(op1, BTD(stoi(end_memoria)));
         }
         if(codigo == "0010"){
           //LDR
+          registradores.LDR(BTD(stoi(reg_memoria)), memoria.get_mem(BTD(stoi(end_memoria))));
         }
     }
     ofstream outFile ("saida.txt");
     if(outFile.is_open()){
-        outFile << "Finalizou" << endl;
+        outFile << "Registradores: " << endl;
+        for(int i = 0; i < 32; i++){
+            outFile << i << ": " << registradores.get_reg(i) << "  ";
+        }
+        outFile << endl;
+        outFile << "===============================================" << endl;
+        outFile << "Memória: " << endl;
+        for(int i = 0; i < 256; i++){
+            outFile << i << ": " << memoria.get_mem(i) << "  ";
+        }
+        outFile << endl;
+        outFile << "===============================================" << endl;
     }
     outFile.close();
     return 0;
