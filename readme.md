@@ -1,3 +1,5 @@
+Trabalho da segunda unidade de Organização de Computadores
+
 /* operação | tipo_recebimento | reg destino | reg1 | reg2 */
 /* operacao | tipo_recebimento | reg destino | constante | constante*/
 
