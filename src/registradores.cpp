@@ -1,6 +1,6 @@
 #include "../include/registradores.h"
 
-int REGS::regs[6] = {0};
+int REGS::regs[32] = {0};
 
 REGS::REGS()
 {

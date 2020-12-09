@@ -6,7 +6,7 @@
 class REGS
 {
     private:
-    	static int regs[6];
+    	static int regs[32];
     public:
 	    REGS();
 	    int get_reg(int posicao);

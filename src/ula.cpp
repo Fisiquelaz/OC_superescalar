@@ -5,7 +5,7 @@ ULA::ULA()
   
 }
 
-void ULA::ADD(int reg, int mem){
+void ULA::ADD(int dest, int op1, int op2){
 	REGS r;
 	r.LDR(reg, r.get_reg(reg) + mem);
 	if(r.get_reg(reg) == 0) r.LDR(4, 1);
