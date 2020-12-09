@@ -35,9 +35,9 @@ void ULA::NEG(int dest){
 }
 void ULA::SHR(int dest){
 	REGS r;
-	r.LDR(dest, dest/2);
+	r.LDR(dest, r.get_reg(dest)/2);
 }
 void ULA::SHL(int dest){
 	REGS r;
-	r.LDR(dest, dest*2);
+	r.LDR(dest, r.get_reg(dest)*2);
 }

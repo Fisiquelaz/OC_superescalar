@@ -10,12 +10,6 @@
 
 
 /*
-*:alguma coisa -> nas linhas abaixo estarão propriedades de alguma coisa
-*sintaxe: codigo registrador modo_endereçamento posição_memoria
-*o último valor na memoria de programa é qual endereço de memória vai ser escrito no arquivo de saida
-*/
-
-/*
 * Operações:
 * 0000 -> NOP
 * 0001 -> STR
@@ -35,3 +29,4 @@
 * Tipos de recebimento:
 * 0 -> registrador
 * 1 -> constante
+*/
