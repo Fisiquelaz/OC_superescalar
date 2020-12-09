@@ -1,0 +1,98 @@
+/*
+*:alguma coisa -> nas linhas abaixo estarão propriedades de alguma coisa
+*sintaxe: codigo registrador modo_endereçamento posição_memoria
+*o último valor na memoria de programa é qual endereço de memória vai ser escrito no arquivo de saida
+*/
+
+/*
+* Operações:
+* 0 -> NOP
+* 1 -> STR
+* 2 -> LDR
+* 3 -> ADD
+* 4 -> OR
+* 5 -> AND
+* 6 -> NOT
+* 7 -> SUB
+* 8 -> JMP
+* 9 -> JN
+* 10 -> JZ
+* 11 -> JC
+* 12 -> JSR
+* 13 -> NEG
+* 14 -> SHR
+* 15 -> HLT
+*/
+
+/*
+* Registradores:
+* 0 - A
+* 1 - B
+* 2 - X
+* 3 - N
+* 4 - Z
+* 5 - C
+*/
+
+/*
+* Modos de endereçamento:
+* 0 - Direto
+* 1 - Indireto
+* 2 - Constante
+* 3 - Indexado
+*/
+
+:dados
+
+128 1
+129 10
+130 5
+131 8
+132 4
+133 2
+134 50
+135 23
+136 14
+137 30
+138 45
+139 7
+140 19
+141 14
+142 35
+143 20
+144 28
+145 13
+146 3
+147 49
+148 50
+149 52
+150 9
+151 34
+152 39
+153 43
+154 16
+155 60
+156 59
+157 57
+158 46
+159 55
+
+161 32
+162 33
+163 128
+164 0
+
+:programa
+
+2 0 3 128
+7 0 0 164
+9 18		
+2 0 3 128
+1 0 0 164
+7 2 0 161
+9 26    	
+8 32  
+3 2 0 162
+8 0     
+15
+164
